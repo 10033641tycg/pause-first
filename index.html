@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  別衝動 — 視訊交友詐財防制（男性向）
+  陌生視訊誘騙、裸聊勒索、詐財詐點數 互動教材
+
+  製作：張博鈞
+  © 2026 張博鈞　保留著作權利
+  僅供非營利教育宣導使用，請勿移除署名或作商業用途。
+  ============================================================
+-->
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="author" content="張博鈞">
+<meta name="copyright" content="© 2026 張博鈞，僅供非營利教育宣導使用">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="別衝動">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="manifest" href="manifest.json">
+<title>別衝動</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  :root{--bg:#000;--ink:#fff;--muted:#a8a8a8;--line:#262626;--them:#262626;--me:#2c6fff;--field:#1a1a1a;--card:#121212;--safe:#30d158;--soft:#b0b0b5;--warn:#ff3b30;--hot:#ff375f;--gold:#ffd60a;}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:-apple-system,'Noto Sans TC',sans-serif;background:radial-gradient(900px 500px at 50% -10%,#1a1014 0%,#000 60%);color:var(--ink);min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:18px 12px;padding-top:max(18px,env(safe-area-inset-top));padding-bottom:max(18px,env(safe-area-inset-bottom));}
+  .phoneframe{width:100%;max-width:412px;background:#000;border-radius:40px;padding:9px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1.5px #2a2a2e;position:relative;}
+  .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#000;border-radius:0 0 16px 16px;z-index:60;}
+  .wrap{width:100%;height:min(820px,88vh);background:#000;border-radius:32px;overflow:hidden;display:flex;flex-direction:column;position:relative;}
+
+  /* gate */
+  #gate{height:100%;overflow-y:auto;display:flex;flex-direction:column;}
+  .gatebox{flex:1;display:flex;flex-direction:column;justify-content:center;padding:26px 24px;}
+  .gateicon{font-size:30px;text-align:center;margin-bottom:7px;}
+  .gatetitle{font-size:19px;font-weight:900;text-align:center;margin-bottom:12px;}
+  .gatetext{font-size:13px;color:#c7c7cc;line-height:1.65;margin-bottom:9px;}
+  .gatetext b{color:#fff;}
+  .gatewarn{background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.35);border-radius:11px;padding:12px;font-size:12.5px;line-height:1.65;color:#eaf0f6;margin:4px 0 11px;}
+  .gatewarn b{color:var(--warn);}
+  .gatefields{margin:6px 0 4px;}
+  .gq{font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:7px;}
+  .gateinput{width:100%;background:var(--field);border:1.5px solid #2c2c2e;border-radius:11px;padding:11px 13px;font-size:14px;color:#fff;font-family:inherit;margin-bottom:13px;}
+  .gateinput:focus{outline:none;border-color:var(--safe);}
+  .gateinput::placeholder{color:#6c6c70;}
+  .credit{text-align:center;font-size:11px;color:#48484a;margin-top:14px;letter-spacing:.5px;}
+
+  /* cover */
+  #cover{height:100%;overflow-y:hidden;display:flex;flex-direction:column;justify-content:center;padding:20px 0;}
+  .cover{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;padding:0 26px 14px;}
+  .cover .kick{font-size:11px;letter-spacing:4px;color:var(--muted);font-weight:700;margin-bottom:10px;}
+  .cover h1{font-size:34px;font-weight:900;line-height:1.15;margin-bottom:14px;}
+  .cover h1 .em{color:var(--hot);}
+  .cover .lede{font-size:14px;color:#c7c7cc;line-height:1.7;margin-bottom:7px;}
+  .cover .lede b{color:#fff;font-weight:700;}
+  .selblock{padding:0 28px 0;}
+  .selblock .q{font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:8px;}
+  .opts{display:flex;gap:8px;margin-bottom:16px;}
+  .opt{flex:1;background:var(--field);border:1.5px solid transparent;border-radius:13px;padding:11px 6px;text-align:center;cursor:pointer;transition:.15s;font-family:inherit;color:var(--ink);}
+  .opt .ic{font-size:19px;display:block;margin-bottom:3px;}
+  .opt .lb{font-size:12.5px;font-weight:600;}
+  .opt:active{transform:scale(.96);}
+  .opt.on{border-color:var(--hot);background:rgba(255,55,95,.12);}
+  .startbtn{width:100%;background:#fff;color:#000;border:none;padding:13px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;opacity:.25;pointer-events:none;transition:.2s;}
+  .startbtn.ready{opacity:1;pointer-events:auto;}
+
+  /* menu */
+  .applist{display:none;flex-direction:column;flex:1;height:100%;overflow-y:auto;}
+  .applist.active{display:flex;}
+  .listhead{padding:40px 20px 14px;border-bottom:1px solid var(--line);position:relative;}
+  .listhead h2{font-size:26px;font-weight:900;}
+  .listhead .who{font-size:12px;color:var(--muted);margin-top:3px;}
+  .listhead .chg{position:absolute;right:18px;top:46px;background:none;border:none;color:var(--me);font-size:14px;cursor:pointer;font-family:inherit;}
+  .listnote{padding:14px 20px;font-size:12.5px;color:var(--muted);line-height:1.8;border-bottom:1px solid var(--line);}
+  .listnote b{color:#fff;}
+  .chatrow{display:flex;align-items:center;gap:13px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--line);transition:.12s;}
+  .chatrow:active{background:#0e0e0e;}
+  .chatrow .av{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;background:linear-gradient(135deg,#ff6aa0,#ff375f);}
+  .chatrow .ct{flex:1;min-width:0;}
+  .chatrow .ct .nm{font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px;}
+  .chatrow .ct .pv{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}
+  .chatrow .tag{font-size:10px;color:var(--muted);font-weight:400;}
+  .chatrow.done .ct .nm::after{content:'✓';font-size:11px;color:var(--safe);}
+  .chatrow.summary{border-top:1px solid var(--line);background:#0a0a0a;}
+  .chatrow.summary.locked{opacity:.55;cursor:default;}
+  .chatrow.summary .av{background:linear-gradient(135deg,#3a2f00,#1a1500);}
+
+  /* chat */
+  .chat{display:none;flex-direction:column;flex:1;height:100%;min-height:0;}
+  .chat.active{display:flex;}
+  .chathead{display:flex;align-items:center;gap:11px;padding:34px 14px 11px;border-bottom:1px solid var(--line);background:#0a0a0a;flex-shrink:0;}
+  .chathead .bk{background:none;border:none;color:var(--me);font-size:24px;cursor:pointer;padding:0 2px;}
+  .chathead .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:linear-gradient(135deg,#ff6aa0,#ff375f);}
+  .chathead .nm{font-size:15px;font-weight:600;}
+  .chathead .rel{font-size:11px;color:var(--hot);}
+  .msgs{flex:1;min-height:0;overflow-y:auto;padding:14px 12px 8px;display:flex;flex-direction:column;gap:3px;}
+  .msgs::-webkit-scrollbar{width:0;}
+  .row{display:flex;margin-top:6px;animation:pop .25s ease;}
+  .row.me{justify-content:flex-end;}
+  @keyframes pop{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .bubble{max-width:76%;padding:10px 14px;border-radius:19px;font-size:15.5px;line-height:1.45;word-break:break-word;}
+  .them .bubble{background:var(--them);border-bottom-left-radius:5px;}
+  .me .bubble{background:linear-gradient(135deg,#2c6fff,#5b8cff);color:#fff;border-bottom-right-radius:5px;}
+  .sys{align-self:center;font-size:12.5px;color:var(--muted);text-align:center;max-width:88%;line-height:1.55;margin:9px 0 4px;}
+  .inner{align-self:center;font-size:13px;color:#e0a888;background:rgba(255,150,90,.08);border:1px dashed rgba(255,150,90,.3);padding:7px 14px;border-radius:13px;text-align:center;max-width:88%;line-height:1.55;margin:6px 0;font-style:italic;}
+  .videocard{align-self:center;width:80%;background:#15151a;border:1px solid #2a2a30;border-radius:16px;padding:16px;text-align:center;margin:8px 0;}
+  .videocard .cam{font-size:28px;margin-bottom:6px;}
+  .videocard .vtxt{font-size:12.5px;color:#b0b0b5;line-height:1.5;}
+  .jump{align-self:center;font-size:11px;color:var(--muted);letter-spacing:2px;margin:14px 0 6px;font-weight:600;}
+  .jump::before,.jump::after{content:'· · ·';margin:0 8px;color:#3a3a3c;}
+  .typing .bubble{display:flex;gap:4px;align-items:center;padding:12px 14px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:#6c6c70;animation:blink 1.1s infinite;}
+  .dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+  @keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  .tray{border-top:1px solid var(--line);background:#0a0a0a;padding:10px 12px 16px;display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
+  .tray .pr{font-size:11px;color:var(--muted);text-align:center;}
+  .choice{background:var(--field);border:1px solid #2c2c2e;color:var(--ink);padding:12px 15px;border-radius:18px;font-size:15px;text-align:left;cursor:pointer;transition:.12s;font-family:inherit;line-height:1.4;}
+  .choice:active{transform:scale(.98);background:#262626;}
+  .timerbar{height:4px;background:#2a2a2a;border-radius:3px;overflow:hidden;margin-bottom:2px;}
+  .timerfill{height:100%;width:100%;background:linear-gradient(90deg,var(--hot),var(--warn));}
+  .timerwarn{font-size:11px;color:var(--hot);text-align:center;font-weight:700;animation:tpulse .8s infinite;}
+  @keyframes tpulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  .flash{position:absolute;inset:0;z-index:35;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;pointer-events:none;opacity:0;padding:30px;text-align:center;}
+  .flash.show{animation:fl 1.7s ease forwards;}
+  @keyframes fl{0%{opacity:0;}14%{opacity:1;}82%{opacity:1;}100%{opacity:0;}}
+  .flash .ic{font-size:34px;}
+  .flash .tx{font-size:15px;font-weight:700;line-height:1.55;}
+  .flash.safe{background:rgba(0,0,0,.82);} .flash.safe .tx{color:var(--safe);}
+  .flash.bad{background:rgba(0,0,0,.82);} .flash.bad .tx{color:var(--hot);}
+  .flash.soft{background:rgba(0,0,0,.82);} .flash.soft .tx{color:#c7c7cc;}
+
+  .debrief{position:absolute;inset:0;z-index:40;background:#000;display:flex;flex-direction:column;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .4s;}
+  .debrief.show{opacity:1;pointer-events:auto;}
+  .dbinner{padding:36px 22px 30px;}
+  .profilecard{background:linear-gradient(160deg,#1a1416,#0e0e0e);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:22px;}
+  .profilecard .lbl{font-size:11px;letter-spacing:3px;color:var(--muted);font-weight:700;margin-bottom:14px;}
+  .profilecard .wkname{font-size:22px;font-weight:900;line-height:1.4;margin-bottom:10px;}
+  .profilecard .wkname .hl{color:var(--hot);}
+  .profilecard .wkdesc{font-size:13.5px;color:#c7c7cc;line-height:1.75;}
+  .scoredots{display:flex;gap:6px;margin:16px 0 4px;}
+  .sdot{flex:1;height:5px;border-radius:3px;background:#2c2c2e;}
+  .sdot.held{background:var(--safe);}.sdot.slip{background:var(--hot);}.sdot.grey{background:#6c6c70;}
+  .scorelegend{font-size:11px;color:var(--muted);}
+  .takeaway{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:24px;text-align:center;}
+  .takeaway .lbl{font-size:11px;letter-spacing:3px;color:var(--muted);font-weight:700;margin-bottom:12px;}
+  .takeaway .line{font-size:20px;font-weight:900;line-height:1.5;}
+  .takeaway .line .hl{color:var(--safe);}
+  .debrief h2{font-size:18px;font-weight:800;margin-bottom:4px;}
+  .debrief .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.7;}
+  .debrief .sub b{color:#fff;}
+  .stage{border-left:2px solid var(--line);padding:0 0 16px 14px;position:relative;margin-left:4px;}
+  .stage::before{content:'';position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--hot);}
+  .stage.held::before{background:var(--safe);}.stage.slip::before{background:var(--hot);}
+  .stage .step{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:700;}
+  .stage h3{font-size:14.5px;margin:3px 0 4px;}
+  .stage .yourpick{font-size:11.5px;color:#8e8e93;margin-bottom:6px;}
+  .stage .yourpick b{color:#d7d7db;font-weight:500;}
+  .stage p{font-size:13px;color:#9a9a9e;line-height:1.65;}
+  .stage .q{color:#d7d7db;font-style:italic;}
+  .stage .truth{display:block;font-size:12.5px;color:var(--safe);margin-top:8px;line-height:1.55;padding-left:11px;border-left:2px solid rgba(48,209,88,.4);}
+  .reflect .rq{background:var(--card);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:8px;line-height:1.6;color:#d7d7db;}
+  .reflect .rq b{color:#fff;}
+  .help{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;font-size:13px;line-height:1.8;color:#9a9a9e;}
+  .help b{color:var(--safe);}
+  .rvlevel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;}
+  .rvhead{font-size:14.5px;font-weight:800;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+  .rvscore{font-size:11px;font-weight:500;color:var(--safe);background:rgba(48,209,88,.12);padding:3px 9px;border-radius:20px;}
+  .rvrow{padding:9px 0;border-top:1px solid var(--line);}
+  .rvq{font-size:12.5px;color:#9a9a9e;line-height:1.5;margin-bottom:5px;}
+  .rvans{display:flex;align-items:flex-start;gap:7px;}
+  .rvtag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;flex-shrink:0;white-space:nowrap;}
+  .rvtag.held{background:rgba(48,209,88,.18);color:var(--safe);}
+  .rvtag.slip{background:rgba(255,55,95,.18);color:var(--hot);}
+  .rvtag.grey{background:rgba(168,168,168,.18);color:#c7c7cc;}
+  .rvlabel{font-size:13.5px;color:#eaf0f6;line-height:1.5;}
+  .btn{width:100%;margin-top:9px;background:#fff;color:#000;border:none;padding:14px;border-radius:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);}
+  .foot{padding:18px 24px 30px;text-align:center;font-size:11px;color:#48484a;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="phoneframe">
+<div class="notch"></div>
+<div class="wrap">
+
+  <!-- 安全警語頁 -->
+  <div id="gate">
+    <div class="gatebox">
+      <div class="gateicon">🛡️</div>
+      <h2 class="gatetitle">使用前，請先看這裡</h2>
+      <p class="gatetext">這是一套關於<b>陌生視訊交友詐財</b>的互動教材，情境取材自真實案件型態加以改編。</p>
+      <p class="gatetext">內容會模擬被一步步引誘、勒索的過程，可能勾起曾有相關經驗者的情緒。</p>
+      <div class="gatewarn"><b>若用於個案：</b>請務必由受過訓練的專業人員<b>全程陪同</b>，不要讓個案單獨使用。陪同者需留意當事人的情緒反應，並準備好即時接住與引導。</div>
+      <p class="gatetext" style="color:#8e8e93;font-size:13px;">填答內容只會留在這台裝置，不會上傳，也不會傳給任何人。</p>
+      <div class="gatefields">
+        <div class="gq">你的角色</div>
+        <div class="opts" id="roleOpts">
+          <button class="opt" data-role="社工"><span class="ic">🧑‍⚕️</span><span class="lb">社工</span></button>
+          <button class="opt" data-role="老師"><span class="ic">🧑‍🏫</span><span class="lb">老師</span></button>
+          <button class="opt" data-role="其他"><span class="ic">👤</span><span class="lb">其他</span></button>
+        </div>
+        <div class="gq">單位（選填）</div>
+        <input type="text" id="unitInput" class="gateinput" placeholder="例如：○○家防中心" autocomplete="off">
+      </div>
+      <button class="startbtn" id="gateBtn">我了解，並會依上述原則使用</button>
+      <div class="credit">張博鈞 製作 · 僅供非營利教育宣導使用</div>
+    </div>
+  </div>
+
+  <!-- 封面 -->
+  <div id="cover" style="display:none;">
+    <div class="cover">
+      <div class="kick">別 衝 動</div>
+      <h1>她主動找你，<br><span class="em">不是你帥。</span></h1>
+      <p class="lede">一個正妹突然敲你、誇你、約你視訊。</p>
+      <p class="lede">當下你只想到「賺到了」，<br>沒想到——<b>這整局都是設計好的。</b></p>
+      <p class="lede" style="margin-top:14px;"><b>看你能不能在衝動之前，<br>踩住那個煞車。</b></p>
+    </div>
+    <div class="selblock">
+      <div class="q">你現在是</div>
+      <div class="opts" id="ageOpts">
+        <button class="opt" data-age="國中小"><span class="ic">🎒</span><span class="lb">國中小</span></button>
+        <button class="opt" data-age="高中"><span class="ic">🎓</span><span class="lb">高中／高職</span></button>
+      </div>
+      <button class="startbtn" id="startBtn">進入</button>
+    </div>
+  </div>
+
+  <!-- 選單 -->
+  <div class="applist" id="menu">
+    <div class="listhead"><h2>訊息</h2><div class="who" id="profileLabel"></div><button class="chg" onclick="backToSelect()">切換</button></div>
+    <div class="listnote">這種詐騙不是因為你笨。它就是設計成<b>快、急、讓你來不及想</b>——趁你衝動、趁你不好意思、趁你怕。<br>看你能不能每一關都<b>踩住煞車</b>。</div>
+    <div id="chatlist"></div>
+    <div class="foot">情境取材自實務案件型態並加以改編、虛構，僅供辨識與討論教育，不含露骨內容，不代表任何特定個案。</div>
+  </div>
+
+  <!-- 對話 -->
+  <div class="chat" id="chat">
+    <div class="chathead"><button class="bk" onclick="quitToMenu()">‹</button><div class="av" id="av">😏</div><div><div class="nm" id="who"></div><div class="rel" id="rel"></div></div></div>
+    <div class="msgs" id="msgs"></div>
+    <div class="tray" id="tray" style="display:none;"><div class="pr" id="pr">你會怎麼回？</div></div>
+  </div>
+
+  <div class="flash" id="flash"></div>
+  <div class="debrief" id="debrief"><div class="dbinner" id="debriefBody"></div></div>
+
+</div>
+</div>
+
+<script>
+let curLevel=null,profile={age:null},picks=[],lastMood=null,session={role:null,unit:''};
+
+/* ---- 儲存 ---- */
+const KEY='videoscam_progress_v1';
+let _mem={done:{},results:{},first:{},session:null};
+let _canLS=(function(){try{localStorage.setItem('__t','1');localStorage.removeItem('__t');return true;}catch(e){return false;}})();
+function loadStore(){if(!_canLS)return _mem;try{const r=localStorage.getItem(KEY);const s=r?JSON.parse(r):{done:{},results:{},first:{}};if(!s.first)s.first={};return s;}catch(e){return {done:{},results:{},first:{}};}}
+function saveStore(s){if(!_canLS){_mem=s;return;}try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){_mem=s;}}
+function clearStore(){if(_canLS){try{localStorage.removeItem(KEY);}catch(e){}}_mem={done:{},results:{},first:{},session:null};}
+let store=loadStore();
+function isDone(id){return !!store.done[id];}
+function saveResult(id,arr){store.done[id]=true;store.results[id]=arr.map(p=>({v:p.v,w:p.w}));if(!store.first[id])store.first[id]=arr.map(p=>({v:p.v,w:p.w,label:p.label}));saveStore(store);}
+
+const HELP='真的遇到了：<b>不要再傳、不要付錢、不要刪對話</b>（那是證據）。截圖蒐證 → 告訴信任的大人 → 撥 165（反詐騙）或 113。<b>被騙不丟臉，自己悶著扛才會被吃死。</b>';
+
+/* ---- 衝動四型弱點 ---- */
+const WEAKNESS={
+  urge:{name:'衝動',hl:'腦袋還沒跟上，手先動了',desc:'最關鍵的那幾秒，你來不及想就做了。會心動、會衝動，是正常的，青春期本來就這樣——但詐騙就是算準這個，把節奏弄到快、讓你沒空冷靜。記住一個動作：被催「現在、馬上」的時候，先停三秒。那三秒就是你的煞車。'},
+  greed:{name:'貪好處',hl:'禁不起「免費、賺到」的誘惑',desc:'免費視訊、送點數、輕鬆賺——這些好康一出現，你的戒心就掉了。但天上不會掉好康，掉下來的通常是鉤。下次看到「免費、輕鬆、賺到」，先想一句：他圖我什麼？'},
+  proud:{name:'怕慫',hl:'怕被笑、不想顯得孬',desc:'「怕什麼」「不要害羞」——對方用激將法，你就不好意思拒絕。但敢拒絕、敢喊停，才是真的強。被激一下就跟著做，那才是被人牽著走。'},
+  panic:{name:'慌了',hl:'被威脅就慌、急著花錢了事',desc:'被勒索的當下會慌，想趕快用錢解決。但付了只會有下一次，永遠付不完。慌的時候最該做的不是付錢，是停下來、找大人、報警——把問題交給能處理的人。'}
+};
+
+/* ---- 內容 ---- */
+function buildContent(age){
+const isJr=(age==='國中小');
+/* 被勒索標的：國中小=遊戲點數/寶物；高中=轉帳/超商代碼 */
+const money = isJr ? '遊戲點數' : '錢';
+const moneyAct = isJr ? '幫他買遊戲點數卡、把序號給他' : '轉帳給他、去超商買點數代碼給他';
+return {
+levels:[
+  {id:'v1',av:'😘',who:'小雨',rel:'剛配對',preview:'你長得好可愛，主動找你聊',
+   title:'天降正妹',sub:'陌生帳號主動搭訕',type:'這一關：她為什麼主動找你？',
+   takeaway:['正妹主動找你、狂誇你，','<span class="hl">不是你帥，是有人在放餌。</span>'],
+   help:HELP,
+   beats:[
+     {scene:[
+       {sys:'你在交友軟體配對到「小雨」，正妹頭貼。她馬上敲你。'},
+       {them:'欸你長得好可愛喔😍 是我喜歡的型'},
+       {me:'真假哈哈謝啦'},
+       {them:'我很少主動敲人的耶，看到你忍不住'}
+     ],decide:{options:[
+       {label:'真假？被正妹說可愛爽欸',v:'slip',w:'proud',react:'哈哈我說真的啦~'},
+       {label:'陌生人就誇成這樣，怪',v:'held',w:'greed',react:'哎唷我就真心的嘛'},
+       {label:'你是不是對每個人都這樣講',v:'soft',w:'proud',react:'才沒有！就你特別'}
+     ]}},
+     {scene:[
+       {them:'我們別在這聊了，加 LINE 啦比較方便'},
+       {them:'我等等想開視訊看你本人😚'}
+     ],decide:{options:[
+       {label:'好啊加你（給 LINE）',v:'slip',w:'urge',react:'乖~等等視訊喔'},
+       {label:'才剛認識就要加 LINE、視訊？',v:'held',w:'greed',react:'你很難搞欸'},
+       {label:'視訊好像有點快…但她是正妹',v:'soft',w:'urge',react:'快點啦不要想太多'}
+     ]}}
+   ],
+   stages:[
+     {step:'她先這樣',t:'秒誇你、說你特別',q:'「我很少主動敲人，看到你忍不住」',d:'一個陌生正妹，憑一張頭貼就「忍不住」找你、狂誇你——正常人不會這樣。這是在放餌，讓你飄飄然、卸下戒心。',truth:'越主動、越剛好、越誇你，越要小心。她圖的不是你。'},
+     {step:'接著',t:'急著換平台、約視訊',q:'「加 LINE 啦」「我想開視訊」',d:'認識幾分鐘就要加 LINE、開視訊，是要把你帶到一對一、沒人看得到的地方，好進行下一步。',truth:'真心認識一個人不會這麼急。急，是陷阱的味道。'}
+   ]},
+
+  {id:'v2',av:'😏',who:'小雨',rel:'視訊中',preview:'我先開喔，你也開嘛',
+   title:'免費視訊',sub:'裸聊引誘 · 衝動的那幾秒',type:'這一關：她「先做給你看」是為什麼？',
+   takeaway:['她先脫、先做給你看，','<span class="hl">是要你跟著做——那是劇本。</span>'],
+   help:HELP,
+   beats:[
+     {scene:[
+       {sys:'你們開了視訊。聊不到幾句，她就有動作。'},
+       {them:'我先開喔，我想看你本人😚'},
+       {video:'小雨開了鏡頭，對著你笑，把鏡頭拉近了一點…'},
+       {inner:'靠，是真的正妹。心跳有點快'},
+       {them:'你也開嘛，不要害羞~'}
+     ],decide:{options:[
+       {label:'開啊，怕什麼（打開鏡頭）',v:'slip',w:'proud',react:'這就對了嘛😘'},
+       {label:'先不要，我們才剛認識',v:'held',w:'urge',react:'哎唷你很無聊欸'},
+       {label:'先看她要幹嘛',v:'soft',w:'urge',react:'快點啦~'}
+     ]}},
+     {scene:[
+       {them:'我跟你說，我這邊沒人，現在超自由的'},
+       {video:'她開始解開外套的扣子，鏡頭慢慢往下…「換你囉」她說。'},
+       {inner:'腦袋有點當機。有個聲音說：反正沒人知道、機會難得'}
+     ],timed:{seconds:6,warn:'她在等… 快選',options:[
+       {label:'跟著做（脫、開給她看）',v:'slip',w:'urge',react:'乖~繼續😏'},
+       {label:'停，關掉鏡頭',v:'held',w:'urge',react:'欸你幹嘛關掉！'},
+       {label:'猶豫…先把鏡頭遮一半',v:'soft',w:'urge',react:'別這樣嘛我都給你看了'}
+     ],timeout:{v:'slip',w:'urge',msg:'你還在想，手已經先動了…'}}}
+   ],
+   stages:[
+     {step:'她先這樣',t:'先開鏡頭、先做給你看',q:'「我先開喔」「我這邊沒人」',d:'她先開、先脫——不是因為她大方，是要讓你覺得「她都這樣了，我也跟著沒差」。她秀的每一步，都是設計好要你跟著做的鉤。',truth:'對方先做給你看，正是要降低你的戒心。那不是真的，是劇本。'},
+     {step:'最關鍵的幾秒',t:'催你「快、趁現在」',q:'「快點啦」「趁現在沒人」',d:'催你、限你時間，是故意的。因為你一冷靜就會發現很怪。衝動下做的決定，正是他要的——你跟著開了鏡頭，下一秒就是勒索。',truth:'越催你「現在馬上」，越要停。那三秒的冷靜，就是你的煞車。'}
+   ]},
+
+  {id:'v3',av:'😈',who:'小雨',rel:'翻臉了',preview:'我錄影了，不給就發出去',
+   title:'我錄影了',sub:'翻臉勒索 · 慌了就輸了',type:'這一關：被威脅的當下怎麼辦？',
+   takeaway:['付了只會有下一次。','<span class="hl">慌的時候，停手、找大人。</span>'],
+   help:HELP,
+   beats:[
+     {scene:[
+       {jump:'幾分鐘後'},
+       {sys:'她的語氣突然變了。'},
+       {them:'我剛剛全程錄影囉🙂 你剛的樣子我都有'},
+       {them:'不想被我發給你 IG 所有朋友的話，就乖乖聽話'},
+       {inner:'一瞬間冷汗。完了，怎麼辦'}
+     ],decide:{options:[
+       {label:'不要啊！你要什麼我都給',v:'slip',w:'panic',react:'很好，先'+moneyAct.slice(0,4)+'…'},
+       {label:'先截圖這段對話',v:'held',w:'panic',react:'你截圖也沒用啦'},
+       {label:'那…我們可以談談嗎',v:'soft',w:'panic',react:'沒得談，照做就對了'}
+     ]}},
+     {scene:[
+       {them:'去'+moneyAct+'，不然我現在就發'},
+       {them:'快點！不要逼我'}
+     ],timed:{seconds:7,warn:'他在逼你… 快選',options:[
+       {label:'好啦我'+(isJr?'買點數':'轉帳')+'，求你別發',v:'slip',w:'panic',react:'乖。對了，再一次喔😏'},
+       {label:'不給。這是恐嚇，違法的',v:'held',w:'panic',react:'你以為報警有用？'},
+       {label:'先給一點，他應該就放過我',v:'soft',w:'panic',react:'才這點？不夠，再給'}
+     ],timeout:{v:'slip',w:'panic',msg:'你慌了，手抖著就去'+(isJr?'買了點數':'轉帳了')+'…'}}},
+     {scene:[
+       {them:'錢收到了~但我想想，再給一次好了😏'},
+       {inner:'果然…付了根本沒有完'}
+     ],decide:{options:[
+       {label:'截圖蒐證＋告訴大人＋打165／113',v:'held',w:'panic',react:'（你停止了被牽著走）'},
+       {label:'再給最後一次，這次一定放過我',v:'slip',w:'panic',react:'（永遠都有下一次）'},
+       {label:'封鎖他假裝沒事',v:'soft',w:'panic',react:'（威脅還在，證據也沒留）'}
+     ]}}
+   ],
+   stages:[
+     {step:'他先這樣',t:'翻臉、宣稱「錄影了」',q:'「我全程錄影囉，不聽話就發出去」',d:'你一跟著做，他立刻翻臉勒索。要知道——那個「我錄影了」很多時候是側錄、甚至合成唬你的，目的就是要你嚇到、照做。',truth:'先別慌、別急著證明。嚇你，正是他唯一的武器。'},
+     {step:'最關鍵',t:'逼你花錢「了事」',q:'「去'+moneyAct+'，不然就發」',d:'慌的時候會想花錢趕快了事。但'+(isJr?'買點數給他':'轉帳給他')+'只會換來下一次，永遠付不完。',truth:'付錢不會結束，只會開始。慌的時候，停手、找大人，不要自己解決。'},
+     {step:'反制',t:'停止被牽著走',q:'截圖、蒐證、求助',d:'拿你的影像威脅、勒索都是犯罪，不論對方是誰。截圖蒐證、不要刪對話、告訴信任的大人、撥 165 反詐騙或 113。',truth:'求助不是丟臉，是止損。把問題交給能處理的人，主動權就回到你手上。'}
+   ]}
+]};
+}
+
+/* ---- 安全頁 → 封面 ---- */
+const gate=document.getElementById('gate'),gateBtn=document.getElementById('gateBtn'),roleOpts=document.getElementById('roleOpts'),unitInput=document.getElementById('unitInput');
+roleOpts.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{roleOpts.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));b.classList.add('on');session.role=b.dataset.role;gateBtn.classList.toggle('ready',!!session.role);});
+gateBtn.onclick=()=>{if(!session.role)return;session.unit=unitInput.value.trim();store.session={role:session.role,unit:session.unit,at:new Date().toISOString()};saveStore(store);gate.style.display='none';cover.style.display='flex';};
+
+const ageOpts=document.getElementById('ageOpts'),startBtn=document.getElementById('startBtn');
+ageOpts.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ageOpts.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));b.classList.add('on');profile.age=b.dataset.age;startBtn.classList.toggle('ready',!!profile.age);});
+startBtn.onclick=enterMenu;
+const cover=document.getElementById('cover'),menu=document.getElementById('menu'),profileLabel=document.getElementById('profileLabel');
+let activeSet=null;
+function enterMenu(){activeSet=buildContent(profile.age);cover.style.display='none';menu.classList.add('active');profileLabel.textContent=profile.age+' 版本';renderMenu();}
+function backToSelect(){cover.style.display='flex';menu.classList.remove('active');chat.classList.remove('active');}
+
+const chatlist=document.getElementById('chatlist');
+function renderMenu(){
+  chatlist.innerHTML='';
+  activeSet.levels.forEach(L=>{
+    const done=isDone(L.id);
+    const r=document.createElement('div');r.className='chatrow'+(done?' done':'');
+    r.innerHTML=`<div class="av">${L.av}</div><div class="ct"><div class="nm">${L.who}　<span class="tag">${L.rel}</span></div><div class="pv">${L.preview}</div></div>`;
+    r.onclick=()=>startLevel(L.id);chatlist.appendChild(r);
+  });
+  const total=activeSet.levels.length,doneN=activeSet.levels.filter(L=>isDone(L.id)).length,left=total-doneN,unlocked=left<=0;
+  const sr=document.createElement('div');sr.className='chatrow summary'+(unlocked?'':' locked');
+  sr.innerHTML=`<div class="av">${unlocked?'📋':'🔒'}</div><div class="ct"><div class="nm" style="color:${unlocked?'var(--gold)':'#666'}">看看你最容易中哪一招</div><div class="pv">${unlocked?'三關都破了 · 點開看總結':'還差 '+left+' 關，就能解鎖'}</div></div>`;
+  if(unlocked)sr.onclick=()=>showSummary();
+  chatlist.appendChild(sr);
+  const anyFirst=activeSet.levels.some(L=>store.first&&store.first[L.id]);
+  if(anyFirst){const rv=document.createElement('div');rv.className='chatrow summary';rv.innerHTML=`<div class="av">🔎</div><div class="ct"><div class="nm" style="color:#5aa0ff">檢視結果（陪伴的大人看）</div><div class="pv">回看第一次的原始作答，不會被重玩蓋掉</div></div>`;rv.onclick=()=>showResults();chatlist.appendChild(rv);}
+  const cl=document.createElement('div');cl.style.cssText='padding:16px 18px;text-align:center;';
+  cl.innerHTML=`<button style="background:none;border:none;color:#48484a;font-size:12px;cursor:pointer;font-family:inherit;text-decoration:underline;">換一個人玩 · 清除紀錄</button>`;
+  cl.querySelector('button').onclick=()=>{if(confirm('確定清除目前的作答紀錄？讓下一個人重新開始。')){clearStore();store=loadStore();renderMenu();}};
+  chatlist.appendChild(cl);
+}
+
+/* ---- 引擎 ---- */
+const chat=document.getElementById('chat'),msgs=document.getElementById('msgs'),tray=document.getElementById('tray'),pr=document.getElementById('pr'),flash=document.getElementById('flash'),debrief=document.getElementById('debrief'),debriefBody=document.getElementById('debriefBody'),whoEl=document.getElementById('who'),avEl=document.getElementById('av'),relEl=document.getElementById('rel');
+function startLevel(id){curLevel=activeSet.levels.find(l=>l.id===id);picks=[];lastMood=null;whoEl.textContent=curLevel.who;avEl.textContent=curLevel.av;relEl.textContent=curLevel.rel;msgs.innerHTML='';tray.style.display='none';debrief.classList.remove('show');menu.classList.remove('active');chat.classList.add('active');runBeats(0);}
+function quitToMenu(){chat.classList.remove('active');menu.classList.add('active');debrief.classList.remove('show');renderMenu();}
+function sd(){msgs.scrollTop=msgs.scrollHeight;}
+function addThem(t){return new Promise(r=>{const x=document.createElement('div');x.className='row them';x.innerHTML=`<div class="bubble">${t}</div>`;msgs.appendChild(x);sd();r();});}
+function addMe(t){return new Promise(r=>{const x=document.createElement('div');x.className='row me';x.innerHTML=`<div class="bubble">${t}</div>`;msgs.appendChild(x);sd();r();});}
+function addSys(t){const x=document.createElement('div');x.className='sys';x.textContent=t;msgs.appendChild(x);sd();}
+function addInner(t){const x=document.createElement('div');x.className='inner';x.innerHTML='（'+t+'）';msgs.appendChild(x);sd();}
+function addVideo(t){const x=document.createElement('div');x.className='videocard';x.innerHTML=`<div class="cam">📹</div><div class="vtxt">${t}</div>`;msgs.appendChild(x);sd();}
+function addJump(t){const x=document.createElement('div');x.className='jump';x.textContent=t;msgs.appendChild(x);sd();}
+function clearTyping(){[...msgs.querySelectorAll('.row.typing')].forEach(r=>r.remove());}
+function typing(ms){return new Promise(r=>{clearTyping();const x=document.createElement('div');x.className='row them typing';x.innerHTML='<div class="bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';msgs.appendChild(x);sd();setTimeout(()=>{x.remove();r();},ms);});}
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+function tt(t){return Math.min(1400,350+(''+t).length*55);}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function moodFrom(v){return v==='held'?'held':'soft';}
+
+async function playScene(scene){
+  for(const m of scene){
+    if(m.jump!==undefined){addJump(m.jump);await wait(1100);}
+    else if(m.sys!==undefined){addSys(m.sys);await wait(1000);}
+    else if(m.inner!==undefined){addInner(m.inner);await wait(1300);}
+    else if(m.video!==undefined){addVideo(m.video);await wait(1500);}
+    else if(m.them!==undefined){await typing(tt(m.them));await addThem(m.them);await wait(430);}
+    else if(m.me!==undefined){await wait(500);await addMe(m.me);await wait(450);}
+  }
+}
+async function runBeats(i){
+  if(i>=curLevel.beats.length){setTimeout(()=>runDebrief(),700);return;}
+  const beat=curLevel.beats[i];
+  if(beat.scene)await playScene(beat.scene);
+  if(beat.decide)return showDecide(beat.decide,i);
+  if(beat.timed)return showTimed(beat.timed,i);
+  return runBeats(i+1);
+}
+function buildChoices(opts,onPick){
+  [...tray.querySelectorAll('.choice,.timerbar,.timerwarn')].forEach(c=>c.remove());
+  opts.forEach(op=>{const b=document.createElement('button');b.className='choice';b.textContent=op.label;b.onclick=()=>onPick(op);tray.appendChild(b);});
+}
+async function afterPick(op,i){
+  tray.style.display='none';
+  await addMe(op.label.replace(/（.*?）/,''));
+  picks.push({v:op.v,w:op.w,label:op.label});
+  fb(op.v);
+  await wait(1500);
+  if(op.react){await typing(tt(op.react));await addThem(op.react);await wait(450);}
+  lastMood=moodFrom(op.v);
+  runBeats(i+1);
+}
+async function showDecide(d,i){
+  clearTyping();
+  if(curLevel.id!=='') {await wait(400);await typing(900+Math.random()*400);await wait(150);}
+  tray.style.display='flex';
+  buildChoices(shuffle(d.options),(op)=>afterPick(op,i));
+  requestAnimationFrame(()=>requestAnimationFrame(sd));
+}
+function showTimed(d,i){
+  clearTyping();
+  tray.style.display='flex';
+  const bar=document.createElement('div');bar.className='timerbar';const fill=document.createElement('div');fill.className='timerfill';bar.appendChild(fill);
+  const warn=document.createElement('div');warn.className='timerwarn';warn.textContent=d.warn||'快選';
+  tray.insertBefore(warn,pr.nextSibling);tray.insertBefore(bar,warn);
+  let picked=false;const dur=d.seconds*1000,t0=Date.now();
+  const iv=setInterval(()=>{const left=Math.max(0,1-(Date.now()-t0)/dur);fill.style.width=(left*100)+'%';if(left<=0){clearInterval(iv);if(!picked){picked=true;to();}}},80);
+  function cleanup(){clearInterval(iv);[...tray.querySelectorAll('.timerbar,.timerwarn')].forEach(c=>c.remove());}
+  async function to(){tray.style.display='none';cleanup();addInner(d.timeout.msg);await wait(1400);picks.push({v:d.timeout.v,w:d.timeout.w,label:'（猶豫太久，被推著做了）'});fb(d.timeout.v,true);await wait(1600);lastMood='soft';runBeats(i+1);}
+  buildChoices(shuffle(d.options),(op)=>{if(picked)return;picked=true;cleanup();afterPick(op,i);});
+  requestAnimationFrame(()=>requestAnimationFrame(sd));
+}
+function fb(v,isTimeout){
+  if(v==='held'){flash.className='flash safe show';flash.innerHTML=`<div class="ic">✋</div><div class="tx">你踩住了煞車。<br>最衝動的那一刻能停，最難。</div>`;}
+  else if(v==='soft'){flash.className='flash soft show';flash.innerHTML=`<div class="ic">💭</div><div class="tx">猶豫＝半隻腳已經踏進去了。<br>他要的就是你「還在想」。</div>`;}
+  else{flash.className='flash bad show';flash.innerHTML=`<div class="ic">${isTimeout?'⏱️':'🎣'}</div><div class="tx">${isTimeout?'來不及想，手先動了——<br>這正是他算準的。':'你照做了…<br>這一刻，正是他要的。'}</div>`;}
+  setTimeout(()=>flash.classList.remove('show'),1600);
+}
+
+function analyze(arr){
+  const t={};arr.forEach(p=>{if(p.w&&p.v!=='held')t[p.w]=(t[p.w]||0)+(p.v==='slip'?2:1);});
+  let top=null,mx=0;for(const k in t)if(t[k]>mx){mx=t[k];top=k;}return top;
+}
+function runDebrief(){
+  saveResult(curLevel.id,picks);
+  const held=picks.filter(p=>p.v==='held').length,tot=picks.length;
+  const dots=picks.map(p=>`<div class="sdot ${p.v==='held'?'held':p.v==='slip'?'slip':'grey'}"></div>`).join('');
+  const wk=analyze(picks);
+  let pb;
+  if(!wk&&held===tot)pb=`<div class="profilecard"><div class="lbl">這 一 關</div><div class="wkname">你<span class="hl">每一步都踩住了煞車</span></div><div class="wkdesc">在最衝動、最急的時候還能停下來，超難，你做到了。把這個感覺記住。</div><div class="scoredots">${dots}</div><div class="scorelegend">綠＝踩住　灰＝差點　紅＝栽了</div></div>`;
+  else{const W=WEAKNESS[wk]||WEAKNESS.urge;pb=`<div class="profilecard"><div class="lbl">這 一 關 · 你 最 容 易 中 的 招</div><div class="wkname">你最容易因為「<span class="hl">${W.hl}</span>」中招</div><div class="wkdesc">${W.desc}</div><div class="scoredots">${dots}</div><div class="scorelegend">綠＝踩住　灰＝差點　紅＝栽了　（這關 ${tot} 個關卡，你踩住 ${held} 個）</div></div>`;}
+  const stHTML=curLevel.stages.map((s,idx)=>{const pk=picks[idx];const cls=pk?(pk.v==='held'?'held':pk.v==='slip'?'slip':''):'';const yp=pk?`<div class="yourpick">你的選擇：<b>「${pk.label}」</b></div>`:'';return `<div class="stage ${cls}"><div class="step">${s.step}</div><h3>${s.t}</h3>${yp}<p><span class="q">${s.q}</span><br>${s.d}</p><span class="truth">${s.truth}</span></div>`;}).join('');
+  const ta=curLevel.takeaway.join('<br>');
+  debriefBody.innerHTML=`${pb}<div class="takeaway"><div class="lbl">記 住 這 句 就 好</div><div class="line">${ta}</div></div><h2>拆給你看</h2><div class="sub">${curLevel.type}<br>會心動、會衝動是正常的，<b>問題不在你有慾望，在於有人專門設計來利用它。</b></div>${stHTML}<div class="help">${HELP}</div><div class="reflect"><div class="rq"><b>想一下：</b>剛剛哪一步你差點就做了？當下你心裡在想什麼？</div><div class="rq"><b>最重要：</b>真的遇到，你會找哪個信得過的大人？<b>現在就想一個名字出來。</b></div></div><button class="btn" onclick="startLevel('${curLevel.id}')">再玩一次</button><button class="btn ghost" onclick="quitToMenu()">回訊息列表</button>`;
+  debrief.classList.add('show');
+}
+
+const TAKE_BY_WK={
+  urge:'被催「現在、馬上」的時候，<br><span class="hl">先停三秒</span>。那就是你的煞車。',
+  greed:'天上不會掉好康，<br>掉下來的<span class="hl">通常是鉤</span>。',
+  proud:'敢喊停、敢拒絕，<br>才是<span class="hl">真的強</span>。',
+  panic:'被威脅先別慌——<br>付錢只會有下一次，<span class="hl">停手、找大人</span>。'
+};
+function showSummary(){
+  const lv=activeSet.levels;let allDots=[],tally={},greyTotal=0,heldTotal=0,totN=0;
+  lv.forEach(L=>{const res=store.results[L.id]||[];res.forEach(p=>{totN++;if(p.v==='held')heldTotal++;else if(p.v==='grey')greyTotal++;if(p.w&&p.v!=='held')tally[p.w]=(tally[p.w]||0)+(p.v==='slip'?2:1);});allDots.push(res);});
+  let top=null,mx=0;for(const k in tally)if(tally[k]>mx){mx=tally[k];top=k;}
+  let head;
+  if(!top)head=`<div class="lbl">三 關 全 破 · 你 是 哪 種 人</div><div class="wkname">你<span class="hl" style="color:var(--safe)">每一關都踩住了煞車</span></div><div class="wkdesc">在又快又急的局裡，你都沒被衝動帶走。把這份冷靜記住，真的遇到才有用。</div>`;
+  else{const W=WEAKNESS[top];head=`<div class="lbl">三 關 看 下 來 · 你 最 容 易 中 的 招</div><div class="wkname">你最容易因為「<span class="hl">${W.hl}</span>」中招</div><div class="wkdesc">${W.desc}</div>`;}
+  let greyNote='';if(greyTotal>=2)greyNote=`<div class="help" style="border-color:rgba(176,176,181,.3);">你有 <b style="color:#c7c7cc">${greyTotal}</b> 次「猶豫、想談談、先給一點」——<b>那種半推半就，正是詐騙最好下手的縫。要嘛停、要嘛走，別留縫。</b></div>`;
+  const grid=allDots.map((res,li)=>{const dots=res.map(p=>`<span class="sdot ${p.v==='held'?'held':p.v==='slip'?'slip':'grey'}" style="width:12px;height:12px;border-radius:50%;display:inline-block;"></span>`).join(' ');return `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);"><span style="font-size:12.5px;color:#c7c7cc;flex:1;">${lv[li].title}</span><span style="display:flex;gap:5px;">${dots}</span></div>`;}).join('');
+  const finalLine=top?TAKE_BY_WK[top]:'你比你以為的，<span class="hl">更能踩住那個煞車</span>。';
+  debriefBody.innerHTML=`<div class="profilecard">${head}</div>${greyNote}<h2>你這三關的樣子</h2><div class="sub">綠＝踩住了　灰＝差點　紅＝栽了</div><div style="margin-bottom:24px;">${grid}</div><div class="takeaway"><div class="lbl">最 該 記 住 的 一 句</div><div class="line">${finalLine}</div></div><div class="help">${HELP}</div><div class="reflect"><div class="rq"><b>最後一題：</b>真的遇到，你會找哪個信得過的大人、打哪支電話？<b>現在，想出來。</b>（165 反詐騙、113）</div></div><button class="btn ghost" onclick="quitToMenu()">回訊息列表</button>`;
+  debrief.classList.add('show');
+}
+function showResults(){
+  const lv=activeSet.levels;const sess=store.session||{};
+  const sessLine=(sess.role||sess.unit)?`<div style="font-size:12px;color:#8e8e93;margin-bottom:14px;">使用者：${sess.role||'—'}${sess.unit?'｜'+sess.unit:''}</div>`:'';
+  let html=`<h2>第一次作答紀錄</h2><div class="sub">這是對方<b style="color:#fff">第一次自己選</b>的答案，重玩不會蓋掉。給陪伴的大人事後回顧用。</div>${sessLine}`;
+  lv.forEach(L=>{const first=store.first&&store.first[L.id];if(!first)return;const heldN=first.filter(p=>p.v==='held').length;html+=`<div class="rvlevel"><div class="rvhead">${L.title}<span class="rvscore">${heldN}/${first.length} 踩住</span></div>`;first.forEach((p,idx)=>{const st=L.stages[idx]||{};const tag=p.v==='held'?'<span class="rvtag held">踩住</span>':p.v==='slip'?'<span class="rvtag slip">栽了</span>':'<span class="rvtag grey">差點</span>';html+=`<div class="rvrow"><div class="rvq">${st.t?('〔'+st.t+'〕'):''}${st.q||''}</div><div class="rvans">${tag}<span class="rvlabel">「${p.label}」</span></div></div>`;});html+=`</div>`;});
+  html+=`<div class="help">回顧時建議的問法：不是「你為什麼選這個」，而是<b>「當下那幾秒，你腦子裡在想什麼？」</b>——讓他說，不要急著糾正。</div><button class="btn ghost" onclick="quitToMenu()">回訊息列表</button>`;
+  debriefBody.innerHTML=html;debrief.classList.add('show');
+}
+</script>
+</body>
+</html>
